@@ -1,7 +1,7 @@
 # Toloka Platform - System Architecture Documentation
 
 **Version**: 2.1
-**Last Updated**: 2025-11-24 14:31:47 UTC
+**Last Updated**: 2025-11-24 15:06:34 UTC+1 (Poland)
 **Based on**: Tloka_UX_UI_2025.pdf + Enklava.co Design System
 
 > **Documentation Source of Truth**: [https://github.com/PawelSroczynski/toloka/](https://github.com/PawelSroczynski/toloka/platform-docs)  
