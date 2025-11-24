@@ -13,6 +13,7 @@
   - [3. Error Handling & Observability](#3-error-handling--observability)
   - [4. Configuration Management & Abstraction](#4-configuration-management--abstraction)
   - [5. Documentation & Commenting Standards](#5-documentation--commenting-standards)
+  - [6. Code Readability & Maintainability Patterns](#6-code-readability--maintainability-patterns)
 - [❌ ANTI-PATTERNS (Auto-Fail Criteria)](#-anti-patterns-auto-fail-criteria)
   - [1. Layer Violations](#1-layer-violations)
   - [2. Business Logic in Presentation Layer](#2-business-logic-in-presentation-layer)
@@ -264,6 +265,39 @@ Organize code by architectural layers with clear separation:
 
 ---
 
+### 6. Code Readability & Maintainability Patterns
+
+#### Immutability & State Management
+
+- **Prefer Immutability:** Avoid in-place mutations - return new objects/arrays rather than modifying existing ones
+- **Const by Default:** Use `const`/`readonly` unless mutation is genuinely required
+- **Predictable State:** Immutable data structures make code easier to reason about and debug (complements anti-pattern #9 on avoiding complex mutations)
+
+#### Control Flow Patterns
+
+- **Early Returns & Guard Clauses:** Return early for invalid inputs to reduce nesting and improve readability
+- **Fail Fast Principle:** Extend the validation "fail fast" approach to all control flow - handle edge cases first, then proceed with happy path
+- **Single Level of Abstraction:** Keep conditionals at the same abstraction level as the function's main purpose
+
+#### Null Safety & Optional Handling
+
+- **Explicit Optional Handling:** Never assume values exist - explicitly check for null/undefined/empty at boundaries
+- **Optional Types:** Use Option/Maybe types or explicit null checks rather than allowing null to propagate
+- **Default Values:** Provide sensible defaults rather than allowing null/undefined to cause runtime errors
+
+#### Function Purity (Expanding on "Pure When Possible")
+
+- **Prefer Pure Functions:** Functions with no side effects are easier to test, reason about, and debug (builds on anti-pattern #9)
+- **Explicit Side Effects:** When side effects are necessary, make them obvious and document them clearly (complements "Explicit over Implicit" principle)
+- **Idempotency:** Operations that can be safely repeated reduce complexity and make systems more resilient
+
+#### Code Organization
+
+- **Co-location:** Keep related code together (components with their tests, types with their usage, related functions in same module)
+- **Logical Grouping:** Group related functionality to reduce cognitive overhead when navigating code
+
+---
+
 ## ❌ ANTI-PATTERNS (Auto-Fail Criteria)
 
 ### 1. Layer Violations
@@ -367,6 +401,11 @@ Organize code by architectural layers with clear separation:
 - [ ] Functions should generally be under 50 lines (extract sub-functions when longer, unless complexity genuinely requires a longer function - see Single Responsibility principle)
 - [ ] Classes should generally have fewer than 5 public methods (split responsibilities when possible, unless the class genuinely requires more methods for its single responsibility)
 - [ ] Code passes all configured linters and formatters without warnings
+- [ ] Functions prefer immutability over mutation
+- [ ] Early returns and guard clauses reduce nesting
+- [ ] Null/undefined values are explicitly handled at boundaries
+- [ ] Pure functions are preferred; side effects are explicit and documented
+- [ ] Related code is co-located for easier navigation
 
 ### Testing
 
